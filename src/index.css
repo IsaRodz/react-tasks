@@ -1,0 +1,90 @@
+@import url("https://fonts.googleapis.com/css?family=Google+Sans:400,500,700");
+@font-face {
+  font-family: Product Sans;
+  src: url("./assets/fonts/Product-Sans-Regular.ttf");
+}
+@font-face {
+  font-family: Product Sans Bold;
+  src: url("./assets/fonts/Product-Sans-Bold.ttf");
+}
+
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font-family: Google Sans, system-ui;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 700;
+}
+h1 {
+  font-size: 3em;
+}
+
+h2 {
+  font-size: 2.4em;
+}
+
+h3 {
+  font-size: 1.5em;
+}
+h4 {
+  font-size: 1em;
+}
+
+h2 {
+  margin: 1em 0 0.5em;
+}
+
+center {
+  margin: 30px auto 0;
+}
+
+center img {
+  width: 100%;
+  max-width: 360px;
+}
+
+a,
+input,
+select,
+textarea,
+button,
+[contenteditable] {
+  border: none;
+  font-family: inherit;
+  outline: none;
+  color: inherit;
+  font-size: inherit;
+  border-radius: 10px;
+  transition: 300ms;
+}
+
+input,
+select,
+textarea {
+  background: rgba(250, 250, 250, 0.1);
+  padding: 0.8em;
+}
+button {
+  padding-right: 1em;
+  padding-left: 1em;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+::placeholder {
+  color: #c9c9c9;
+}
