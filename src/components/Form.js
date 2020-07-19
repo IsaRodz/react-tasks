@@ -4,28 +4,28 @@ import saveTasks from "../hooks/saveTasks";
 import styled from "styled-components";
 import { colors, themes } from "./theme";
 
-const TaskForm = () => {
+const TaskForm = ({ theme }) => {
   const [tasks, setTasks] = useContext(TasksContext);
   const [name, setName] = useState("");
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (name.trim().length > 3) {
       createTask(name);
       setName("");
     }
   };
-  const createTask = task => {
+  const createTask = (task) => {
     const updated = [...tasks, { name: task, completed: false }];
     setTasks(updated);
     saveTasks(updated);
   };
   return (
-    <Form className="app-form" onSubmit={handleSubmit}>
+    <Form theme={theme} className="app-form" onSubmit={handleSubmit}>
       <input
         type="text"
         value={name}
-        onChange={e => setName(e.target.value)}
+        onChange={(e) => setName(e.target.value)}
         placeholder="Is there something to do?"
       />
       <button>Add todo</button>
@@ -44,12 +44,13 @@ const Form = styled.form`
     left: 0;
     right: 0;
     padding: 10px;
-    background: ${themes.light.nav};
+    background: ${({ theme }) => themes[theme].nav};
   }
   input {
     flex: 1;
     margin-right: 10px;
-    background: #dcdfe7;
+    background: ${({ theme }) => themes[theme].input};
+    color: ${({ theme }) => themes[theme].textColor};
     &:focus {
       background: transparent;
       border-radius: 0;
@@ -60,7 +61,7 @@ const Form = styled.form`
     }
   }
   button {
-    background: #03a9f4;
+    background: ${colors.blue};
     color: #fff;
   }
 `;

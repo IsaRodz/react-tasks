@@ -1,17 +1,21 @@
 import React, { useContext } from "react";
 import { TasksContext } from "../context/Tasks";
+import { ThemeContext } from "../context/Theme";
 import draw from "../assets/draw.svg";
 import TaskItem from "./TaskItem";
 import styled from "styled-components";
 
+import { themes } from "./theme";
+
 const TasksList = () => {
   const [tasks] = useContext(TasksContext);
+  const [theme] = useContext(ThemeContext);
 
   return (
     <main className="app-body">
       {tasks.length > 0 ? (
         <List>
-          <h2>Tasks</h2>
+          <h2 style={{ color: themes[theme].textColor }}>Tasks</h2>
           {tasks.map((task, id) => (
             <TaskItem task={task} id={id} key={id} />
           ))}

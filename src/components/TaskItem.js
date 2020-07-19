@@ -1,20 +1,25 @@
 import React, { useContext } from "react";
+
 import { TasksContext } from "../context/Tasks";
+import { ThemeContext } from "../context/Theme";
+
 import saveTasks from "../hooks/saveTasks";
 import Checkbox from "./Checkbox";
-import { colors } from "./theme";
+import { colors, themes } from "./theme";
 import styled from "styled-components";
 
 function TaskItem({ task, id }) {
   const [tasks, setTasks] = useContext(TasksContext);
 
-  const deleteTask = async id => {
+  const [theme] = useContext(ThemeContext);
+
+  const deleteTask = async (id) => {
     let updated = tasks.filter((task, index) => index !== id);
     setTasks(updated);
     saveTasks(updated);
   };
 
-  const switchTask = id => {
+  const switchTask = (id) => {
     const updated = tasks.map((task, index) => {
       if (index === id)
         return {
@@ -28,7 +33,7 @@ function TaskItem({ task, id }) {
   };
 
   return (
-    <Item completed={task.completed}>
+    <Item theme={theme} completed={task.completed}>
       <CheckboxContainer>
         <label>
           <input
@@ -46,19 +51,19 @@ function TaskItem({ task, id }) {
 }
 
 const Item = styled.li`
-  background: #ffffff;
+  background: ${({ theme }) => themes[theme].item};
   border-radius: 7px;
   box-shadow: 0 2px 10px -2px rgba(33, 33, 33, 0.1);
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
   padding: 1.2em;
-  ${props =>
+  color: ${({ theme }) => themes[theme].textColor};
+  ${(props) =>
     props.completed &&
     `
     label { 
     text-decoration: line-through;
-    color: rgba(0,0,0,.5);
     }  
   `}
   button {
@@ -102,7 +107,7 @@ const CheckboxContainer = styled.div`
           }
         }
         ~ span {
-          color: rgba(0, 0, 0, 0.5);
+          opacity: 0.5;
           text-decoration: line-through;
         }
       }

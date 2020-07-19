@@ -1,23 +1,36 @@
-import React from "react";
-// import Header from "./Header";
-// import TasksList from "./TasksList";
+import React, { useContext } from "react";
 
-// import TasksProvider from "./../context/Tasks";
+import Header from "./Header";
+import TasksList from "./TasksList";
+
+import TasksProvider from "./../context/Tasks";
+import ThemeProvider, { ThemeContext } from "./../context/Theme";
+
+import { themes } from "./theme";
 
 import styled from "styled-components";
-import { themes } from "./theme";
-import SimpleForm from "./Form/SimpleForm";
 
 const App = () => {
   return (
-    <AppWrapper>
-      <SimpleForm />
-    </AppWrapper>
+    <ThemeProvider>
+      <AppWrapper>
+        <TasksProvider>
+          <Header />
+          <TasksList />
+        </TasksProvider>
+      </AppWrapper>
+    </ThemeProvider>
   );
 };
 
-const AppWrapper = styled.main`
-  background-color: ${themes.light.background};
+const AppWrapper = ({ children }) => {
+  const [theme] = useContext(ThemeContext);
+
+  return <Wrapper theme={theme}>{children}</Wrapper>;
+};
+
+const Wrapper = styled.main`
+  background-color: ${({ theme }) => themes[theme].background};
   min-height: 100vh;
   display: flex;
   flex-direction: column;
